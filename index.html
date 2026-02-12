@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Be My Valentine? ♡</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9aa2, #ffb7b2, #ffd4e0);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: #2d1b24;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 28px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      max-width: 90%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 3.6rem;
+      margin-bottom: 2.5rem;
+      color: #e83e8c;
+      text-shadow: 0 2px 10px rgba(232, 62, 140, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 40px 0;
+    }
+
+    button {
+      font-size: 1.8rem;
+      padding: 18px 60px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: #ff4d94;
+      color: white;
+      box-shadow: 0 6px 20px rgba(255, 77, 148, 0.5);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.15);
+      background: #ff2e82;
+      box-shadow: 0 10px 30px rgba(255, 46, 130, 0.6);
+    }
+
+    #noBtn {
+      background: #a3a3a3;
+      color: white;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    #noBtn:hover {
+      background: #888;
+      transform: scale(1.08);
+    }
+
+    .video-container {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.8rem;
+      animation: fall linear infinite;
+      color: #ff4d94;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(120vh) rotate(720deg); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-15px); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.6rem; }
+      .buttons { flex-direction: column; gap: 30px; }
+      button { padding: 16px 80px; font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container" id="question">
+  <h1>Will you be my Valentine? ♡</h1>
+  
+  <div class="buttons">
+    <button id="yesBtn">Yes!! 💖</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<div class="video-container" id="yesVideo">
+  <video autoplay loop playsinline>
+    <source src="m.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="video-container" id="noVideo">
+  <video autoplay loop playsinline>
+    <source src="g.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+  // Floating hearts background
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 8 + 6) + "s";
+    heart.style.fontSize = (Math.random() * 1.2 + 0.8) + "rem";
+    document.getElementById("hearts").appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 14000);
+  }
+
+  setInterval(createHeart, 400);
+
+  // Button logic
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn  = document.getElementById("noBtn");
+  const question = document.getElementById("question");
+  const yesVideo = document.getElementById("yesVideo");
+  const noVideo  = document.getElementById("noVideo");
+
+  yesBtn.addEventListener("click", () => {
+    question.style.display = "none";
+    yesVideo.style.display = "flex";
+  });
+
+  noBtn.addEventListener("click", () => {
+    question.style.display = "none";
+    noVideo.style.display = "flex";
+  });
+</script>
+
+</body>
+</html>
